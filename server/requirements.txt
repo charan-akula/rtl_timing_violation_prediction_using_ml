@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+pyverilog
+networkx
+matplotlib
+joblib
