@@ -1,14 +1,20 @@
 # RTL Timing Violation Prediction using ML
 
-This project is a full-stack application designed to analyze Verilog RTL code and predict potential timing violations using Machine Learning. It features a React-based frontend for code submission and visualization, and a FastAPI-based backend that performs RTL graph analysis and runs predictions using a pre-trained Decision Tree model.
+## 📌 Project Overview
+Timing violations are a major challenge in digital circuit design because they can cause functional errors, unstable outputs, and expensive chip re-spins. Traditional Electronic Design Automation (EDA) tools typically detect these issues late in the design cycle (such as during synthesis or static timing analysis), limiting opportunities for early optimization.
+
+This project introduces a **Machine Learning–based framework** that predicts timing violations directly from **Register Transfer Level (RTL)** designs before synthesis. By analyzing structural characteristics of circuits early, engineers can identify risky designs and optimize them sooner.
+
+The system automatically extracts structural features from Verilog RTL using **PyVerilog**, then feeds them into a trained **Decision Tree classifier** that predicts whether a circuit is likely to violate timing constraints. The model currently achieves approximately **80% prediction accuracy**.
 
 ## 🚀 Features
 
 - **RTL Analysis**: Parses Verilog gate-level code to extract adjacency and feature matrices.
 - **Graph Visualization**: Generates and displays a visual graph of the RTL structure.
-- **Timing Prediction**: Predicts timing violations based on circuit structure and user-defined clock parameters (period, uncertainty, setup/hold times).
+- **Timing Violation Prediction**: Predicts timing violations based on circuit structure and user-defined clock parameters (period, uncertainty, setup/hold times).
 - **Interactive UI**: User-friendly interface for uploading `.v` files or pasting code directly.
 - **Model-Driven**: Uses a Decision Tree classifier trained on timing data.
+---
 
 ## 🛠️ Tech Stack
 
@@ -16,45 +22,27 @@ This project is a full-stack application designed to analyze Verilog RTL code an
 - **Backend**: FastAPI, Python, PyVerilog, NetworkX, Matplotlib, Joblib.
 - **Machine Learning**: Scikit-learn (Decision Tree Classifier).
 
-## 📂 Project Structure
-
-```text
-rtl_prediction_by_ml/
-├── client/                 # React Frontend
-│   ├── src/
-│   │   ├── components/     # UI Components
-│   │   ├── pages/          # Layout and Main Pages
-│   │   └── App.tsx         # Main Component
-│   ├── package.json
-│   └── vite.config.ts
-├── server/                 # FastAPI Backend
-│   ├── app/
-│   │   ├── main.py         # App Entry Point
-│   │   ├── routes.py       # API Endpoints
-│   │   ├── matrices.py     # RTL Parsing Logic
-│   │   └── schemas.py      # Pydantic Models
-│   ├── decision_tree_model.pkl # Trained ML Model
-│   └── requirements.txt
-└── README.md
-```
 
 ## ⚙️ Setup Instructions
 
 ### Backend (FastAPI)
 
-1. Navigate to the server directory:
+1. Install dependencies:
    ```bash
-   cd server
+   pip install -r requirements.txt
    ```
+   
 2. Create and activate a virtual environment:
    ```bash
    python -m venv myenv
    source myenv/bin/activate  # On Windows: myenv\Scripts\activate
    ```
-3. Install dependencies:
+
+3. Navigate to the server directory:
    ```bash
-   pip install -r requirements.txt
+   cd server
    ```
+
 4. Run the backend server:
    ```bash
    uvicorn app.main:app --reload
